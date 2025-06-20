@@ -3,52 +3,54 @@ using namespace std;
 #define faster ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
 #define ll long long 
 const int maxN = 105;
-int n,m,u;
+int n,m,u,a[maxN][maxN];
 bool visited[maxN];
-set<int> adj[maxN];
-int path[maxN];
+vector<int> path;
 vector<vector<int>> ans;
 
+void Try(int v,int cnt){
+    if (cnt == n && a[v][u]) {
+        path.push_back(u);
+        ans.push_back(path);
+        path.pop_back();
+        return;
+    }
+    for(int i=1;i<=n;i++){
+        if(a[v][i] && !visited[i]){
+            visited[i] = 1;
+            path.push_back(i);
+            Try(i,cnt+1);
+            path.pop_back();
+            visited[i] = 0;
+        }
+    }
+}
 void init(){
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=n;j++){
+            a[i][j] = 0;
+        }
+    }
+}
+void solve(){
     cin>>n>>m>>u;
+    init();
     for(int i=1;i<=m;i++){
         int x,y;
         cin>>x>>y;
-        adj[x].insert(y);
+        a[x][y] = 1;
+        a[y][x] = 1;    
     }
-}
-
-void Hamilton(int cnt,int v){
-    visited[v] = 1;
-    path[cnt] = v;
-    if(cnt==n){
-        if(adj[v].count(path[1])==1){
-            path[++cnt] = path[1];
-            vector<int> tmp(path+1, path+cnt+1);
-            ans.push_back(tmp);
-        }
-        return;
-    }
-
-    for(int x:adj[v]){
-        if(!visited[x]){
-            Hamilton(cnt+1,x);
-            visited[x] = 0;
-        }
-    }
-    visited[v] = 0;
-}
-
-void solve(){
-    init();
-    Hamilton(1,u);
+    path.push_back(u);
+    visited[u] = 1;
+    Try(u,1);
+    cout<<ans.size()<<"\n";
     for(auto it:ans){
-        for(int i=0;i<it.size();i++){
-            cout<<it[i]<<" ";
+        for(int x:it){
+            cout<<x<<" ";
         }
-        cout<<"\n";
+        cout<<endl;
     }
-    cout<<ans.size();
 }
 int main(){
     faster;
