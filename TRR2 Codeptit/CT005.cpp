@@ -54,7 +54,7 @@ void solve(){
 }
 int main(){
     faster;
-    freopen("CT.INP","r",stdin);
-    freopen("CT.OUT","w",stdout);
+    // freopen("CT.INP","r",stdin);
+    // freopen("CT.OUT","w",stdout);
     solve();
 }
