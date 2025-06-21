@@ -47,6 +47,9 @@ void solve(){
         if(ans.size()==n-1){
             cout<<ans.size()<<endl;
             for(pii p:ans){
+                if(p.first > p.second){
+                    swap(p.first,p.second);
+                }
                 cout<<p.first<<" "<<p.second<<endl;
             }
         }
@@ -57,6 +60,9 @@ void solve(){
         if(ans.size()==n-1){
             cout<<ans.size()<<endl;        
             for(pii p:ans){
+                if(p.first > p.second){
+                    swap(p.first,p.second);
+                }
                 cout<<p.first<<" "<<p.second<<endl;
             }
         }
@@ -65,7 +71,7 @@ void solve(){
 }
 int main(){
     faster;
-    // freopen("CK.INP","r",stdin);
-    // freopen("CK.OUT","w",stdout);
+    freopen("CK.INP","r",stdin);
+    freopen("CK.OUT","w",stdout);
     solve();
 }
