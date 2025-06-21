@@ -8,8 +8,6 @@ vector<int> adj[maxN];
 bool visited[maxN];
 void bfs(int u){
     queue<int> q;
-    memset(visited, 0, sizeof(visited));
-    memset(par, 0, sizeof(par));
     q.push(u);
     visited[u] = 1;
     while(!q.empty()){
@@ -22,6 +20,19 @@ void bfs(int u){
                 visited[v] = 1;
             }
         }
+    }
+}
+void path(){
+    vector<int> res;
+    int s = v;
+    while(s!=u){
+        res.push_back(s);
+        s = par[s];
+    }
+    res.push_back(u);
+    reverse(res.begin(),res.end());
+    for(int x:res){
+        cout<<x<<" ";
     }
 }
 void solve(){
@@ -44,19 +55,9 @@ void solve(){
         cout<<ans;
     }
     else{
-        vector<int> res;
         bfs(u);
         if(visited[v]){
-            int s = v;
-            while(s!=u){
-                res.push_back(s);
-                s = par[s];
-            }
-            res.push_back(u);
-            reverse(res.begin(),res.end());
-            for(int x:res){
-                cout<<x<<" ";
-            }
+            path();
         }
         else{
             cout<<0;
