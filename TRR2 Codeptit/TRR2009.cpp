@@ -46,7 +46,6 @@ void solve(){
             cin>>a[i][j];
             if(a[i][j]){
                 adj[i].pb(j);
-                adj[j].pb(i);
             }
         }
     }
